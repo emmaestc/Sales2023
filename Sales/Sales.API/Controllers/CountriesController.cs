@@ -35,7 +35,6 @@ namespace Sales.API.Controllers
         }
 
         [HttpPost]
-
         public async Task<ActionResult> PostAsync(Country country) 
         {
             _context.Add(country);
@@ -44,7 +43,6 @@ namespace Sales.API.Controllers
         }
 
         [HttpPut]
-
         public async Task<ActionResult> PutAsync(Country country)
         {
             _context.Update(country);
