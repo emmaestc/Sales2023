@@ -21,6 +21,7 @@ void SeedData(WebApplication app)
     {
         SeedDb? service = scope.ServiceProvider.GetService<SeedDb>();
         service!.SeedAsync().Wait();
+        service!.SeederAsync().Wait();
     }
 
 }
