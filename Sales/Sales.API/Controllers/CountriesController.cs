@@ -20,7 +20,18 @@ namespace Sales.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(await _context.Countries.ToListAsync());
+            return Ok(await _context.Countries
+                .Include(x => x.States)   // equivalente a select * from paises inner join states
+                .ToListAsync());          // Include es equivalente a hacer un inner join
+        }
+
+        [HttpGet("full")]
+        public async Task<IActionResult> GetFullAsync()
+        {
+            return Ok(await _context.Countries
+                .Include(x => x.States!)
+                .ThenInclude(x => x.Cities)  // De la primera relacion en adelante lleva ThenInclude
+                .ToListAsync());         
         }
 
         [HttpGet("{id:int}")]

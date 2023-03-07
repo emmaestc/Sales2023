@@ -17,6 +17,8 @@ namespace Sales.shared.Entities
         [MaxLength(100, ErrorMessage = "El campo {0} no puede contener mas de {1} caracteres")]
         public string Name { get; set; } = null!;
 
+        public int CountryId { get; set; }
+
         public Country? Country { get; set; } // con esto entity framework sabe que hay una relacion 1 a m
 
         public ICollection<City>? Cities { get; set; }
