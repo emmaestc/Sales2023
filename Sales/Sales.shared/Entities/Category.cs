@@ -19,5 +19,9 @@ namespace Sales.shared.Entities
         //public ICollection<Idcagor>? States { get; set; }
 
         //public int StatesNumber => States == null ? 0 : States.Count;
+
+        //public ICollection<Category>? Categories { get; set; }
+
+//        public int StatesNumber => Categories == null ? 0 : Categories.Count;
     }
 }

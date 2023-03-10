@@ -88,9 +88,9 @@ namespace Sales.API.Data
                 }
             //}
         }
-    
 
-    private async Task CheckCategoriesAsync()
+
+        private async Task CheckCategoriesAsync()
         {
             if (!_context.Categories.Any())
             {
@@ -113,4 +113,36 @@ namespace Sales.API.Data
 
         }
     }
+
+    //private async Task CheckCategoriesAsync()
+    //{
+    //    Response responseCategories = await _apiService.GetListAsync<CategoryResponse>("/v1", "/categories");
+    //    if (responseCategories.IsSuccess)
+    //    {
+    //        List<CategoryResponse> categories = (List<CategoryResponse>)responseCategories.Result!;
+    //        foreach (CategoryResponse categoryResponse in categories)
+    //        {
+    //            Category category = await _context.Categories!.FirstOrDefaultAsync(c => c.Name == categoryResponse.Name!)!;
+    //            if (category == null)
+    //            {
+    //                category = new() { Name = categoryResponse.Name!, Categories = new List<Category>() };
+    //                Response responseCategory = await _apiService.GetListAsync<CategoryResponse>("/v1", $"/categories/{categoryResponse.Iso2}/categories");
+    //                if (responseCategory.IsSuccess)
+    //                {
+    //                    List<CategoryResponse> Category = (List<CategoryResponse>)responseCategory.Result!;
+    //                    continue;
+
+
+    //                }
+    //                //if (country.StatesNumber > 0)
+    //                //{
+    //                //    _context.Countries.Add(country);
+    //                //    await _context.SaveChangesAsync();
+    //                //}
+    //            }
+    //        }
+    //    }
+
+    //}
 }
+
