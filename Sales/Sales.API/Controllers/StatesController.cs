@@ -22,7 +22,16 @@ namespace Sales.API.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [AllowAnonymous]
+        [HttpGet("combo/{countryId:int}")]
+        public async Task<ActionResult> GetCombo(int countryId)
+        {
+            return Ok(await _context.States
+                .Where(x => x.CountryId == countryId)
+                .ToListAsync());
+        }
+
+        //[HttpGet]
         //public async Task<IActionResult> GetAsync()
         //{
         //  return Ok(await _context.States
