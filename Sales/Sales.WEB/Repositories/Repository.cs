@@ -16,6 +16,11 @@ namespace Sales.WEB.Repositories
         {
             _httpClient = httpClient;
         }
+        public async Task<HttpResponseWrapper<object>> Get(string url)
+        {
+            var responseHTTP = await _httpClient.GetAsync(url);
+            return new HttpResponseWrapper<object>(null, !responseHTTP.IsSuccessStatusCode, responseHTTP);
+        }
 
         public async Task<HttpResponseWrapper<T>> Get<T>(string url)
         {
