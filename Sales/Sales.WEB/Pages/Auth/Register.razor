@@ -4,9 +4,9 @@
 @inject NavigationManager navigationManager
 @inject ILoginService loginService
 
-
 <EditForm Model="userDTO" OnValidSubmit="CreteUserAsync">
     <DataAnnotationsValidator />
+
     <div class="card">
         <div class="card-header">
             <span>
@@ -15,7 +15,6 @@
             </span>
         </div>
         <div class="card-body">
-
             <div class="row">
                 <div class="col-6">
                     <div class="mb-3">
@@ -121,16 +120,15 @@
                             <InputText type="password" class="form-control" @bind-Value="@userDTO.PasswordConfirm" />
                             <ValidationMessage For="@(() => userDTO.PasswordConfirm)" />
                         </div>
-                        <div class="mb-3">
-                            <InputImg Label="Foto" ImageSelected="ImageSelected" ImageURL="@imageUrl" />
-                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <InputImg Label="Foto" ImageSelected="ImageSelected" ImageURL="@imageUrl" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </EditForm>
-
 
 @code {
     private UserDTO userDTO = new();
@@ -139,33 +137,15 @@
     private List<City>? cities;
     private string? imageUrl;
 
-    protected override async Task OnInitializedAsync()
+    protected async override Task OnInitializedAsync()
     {
         await LoadCountriesAsync();
-        if (!string.IsNullOrEmpty(userDTO.Photo))
-        {
-            imageUrl = userDTO.Photo;
-            userDTO.Photo = null;
-        }
     }
 
     private void ImageSelected(string imagenBase64)
     {
         userDTO.Photo = imagenBase64;
         imageUrl = null;
-    }
-
-
-    private async Task CountryChangedAsync(ChangeEventArgs e)
-    {
-        var selectedCountry = Convert.ToInt32(e.Value!);
-        await LoadStatesAsyn(selectedCountry);
-    }
-
-    private async Task StateChangedAsync(ChangeEventArgs e)
-    {
-        var selectedState = Convert.ToInt32(e.Value!);
-        await LoadCitiesAsyn(selectedState);
     }
 
     private async Task LoadCountriesAsync()
@@ -181,6 +161,12 @@
         countries = responseHttp.Response;
     }
 
+    private async Task CountryChangedAsync(ChangeEventArgs e)
+    {
+        var selectedCountry = Convert.ToInt32(e.Value!);
+        await LoadStatesAsyn(selectedCountry);
+    }
+
     private async Task LoadStatesAsyn(int countryId)
     {
         var responseHttp = await repository.Get<List<State>>($"/api/states/combo/{countryId}");
@@ -192,6 +178,12 @@
         }
 
         states = responseHttp.Response;
+    }
+
+    private async Task StateChangedAsync(ChangeEventArgs e)
+    {
+        var selectedState = Convert.ToInt32(e.Value!);
+        await LoadCitiesAsyn(selectedState);
     }
 
     private async Task LoadCitiesAsyn(int stateId)
@@ -206,7 +198,6 @@
 
         cities = responseHttp.Response;
     }
-
 
     private async Task CreteUserAsync()
     {

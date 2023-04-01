@@ -5,7 +5,7 @@
 <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <div class="mb-3">
-        <label>Cuidad:</label>
+        <label>Ciudad:</label>
         <div>
             <InputText class="form-control" @bind-Value="@City.Name" />
             <ValidationMessage For="@(() => City.Name)" />
@@ -64,4 +64,3 @@
         context.PreventNavigation();
     }
 }
-

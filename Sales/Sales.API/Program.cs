@@ -66,7 +66,7 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
     x.Password.RequireLowercase = false;
     x.Password.RequireNonAlphanumeric = false;
     x.Password.RequireUppercase = false;
-    x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);  //TODO: cambiar a 5 minutes
+    x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     x.Lockout.MaxFailedAccessAttempts = 3;
     x.Lockout.AllowedForNewUsers = true;
 })

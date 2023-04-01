@@ -7,6 +7,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Pages\Auth\ChangePassword.razor" />
+    <None Include="Pages\Auth\ConfirmEmail.razor" />
+    <None Include="Pages\Auth\EditUser.razor" />
+    <None Include="Pages\Auth\Login.razor" />
+    <None Include="Pages\Auth\Logout.razor" />
+    <None Include="Pages\Auth\RecoverPassword.razor" />
+    <None Include="Pages\Auth\Register.razor" />
+    <None Include="Pages\Auth\ResendConfirmationEmailToken.razor" />
+    <None Include="Pages\Auth\ResetPassword.razor" />
+    <None Include="Pages\Categories\CategoriesIndex.razor" />
+    <None Include="Pages\Categories\CategoryCreate.razor" />
+    <None Include="Pages\Categories\CategoryEdit.razor" />
+    <None Include="Pages\Categories\CategoryForm.razor" />
+    <None Include="Pages\Cities\CityCreate.razor" />
+    <None Include="Pages\Cities\CityEdit.razor" />
+    <None Include="Pages\Cities\CityForm.razor" />
+    <None Include="Pages\Counter.razor" />
+    <None Include="Pages\Countries\CountriesIndex.razor" />
+    <None Include="Pages\Countries\CountryCreate.razor" />
+    <None Include="Pages\Countries\CountryDetails.razor" />
+    <None Include="Pages\Countries\CountryEdit.razor" />
+    <None Include="Pages\Countries\CountryForm.razor" />
+    <None Include="Pages\FetchData.razor" />
+    <None Include="Pages\Index.razor" />
+    <None Include="Pages\States\StateCreate.razor" />
+    <None Include="Pages\States\StateDetails.razor" />
+    <None Include="Pages\States\StateEdit.razor" />
+    <None Include="Pages\States\StateForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.Modal" Version="7.1.0" />
     <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="7.0.2" />

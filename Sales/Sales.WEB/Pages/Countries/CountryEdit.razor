@@ -4,8 +4,6 @@
 @inject SweetAlertService sweetAlertService
 @attribute [Authorize(Roles = "Admin")]
 
-
-
 <h3>Editar País</h3>
 
 @if (country is null)
@@ -17,18 +15,19 @@ else
     <CountryForm @ref="countryForm" Country="country" OnValidSubmit="EditAsync" ReturnAction="Return" />
 }
 
-
 @code {
     private Country? country;
     private CountryForm? countryForm;
+
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
 
     [Parameter]
     public int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var responseHttp = await repository.Get<Country>($"api/countries/{Id}");
-
+        var responseHttp = await repository.Get<Country>($"/api/countries/{Id}");
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
@@ -36,34 +35,31 @@ else
                 navigationManager.NavigateTo("/countries");
                 return;
             }
+
             var message = await responseHttp.GetErrorMessageAsync();
             await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
-        country = responseHttp.Response;
 
+        country = responseHttp.Response;
     }
 
     private async Task EditAsync()
     {
-        var responseHttp = await repository.Put("api/countries", country);
-
+        var responseHttp = await repository.Put("/api/countries", country);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
             await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
-
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
         Return();
-        
     }
-
 
     private void Return()
     {
         countryForm!.FormPostedSuccessfully = true;
         navigationManager.NavigateTo("/countries");
     }
-
 }

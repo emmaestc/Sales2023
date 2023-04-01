@@ -49,7 +49,7 @@
         }
 
         loading = false;
-        await sweetAlertService.FireAsync("Confirmación", "Se te ha enviado un correo electrónico con las instrucciones para activar tu usuario.", SweetAlertIcon.Info);
+        await sweetAlertService.FireAsync("Confirmación", "Se te ha enviado un correo electrónico de nuevo con las instrucciones para activar tu usuario.", SweetAlertIcon.Info);
         navigationManager.NavigateTo("/");
     }
 }

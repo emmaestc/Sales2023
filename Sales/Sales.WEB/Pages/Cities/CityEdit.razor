@@ -8,7 +8,7 @@
 
 @if (city is null)
 {
-    <p>Cargando...</p>
+    <div class="spinner" />
 }
 else
 {
@@ -18,6 +18,9 @@ else
 @code {
     private City? city;
     private CityForm? cityForm;
+
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
 
     [Parameter]
     public int CityId { get; set; }
@@ -50,7 +53,7 @@ else
             await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
-
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
         Return();
     }
 
@@ -60,4 +63,3 @@ else
         navigationManager.NavigateTo($"/states/details/{city!.StateId}");
     }
 }
-

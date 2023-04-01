@@ -3,16 +3,15 @@
 <NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
 
 <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
-    <DataAnnotationsValidator/>
+    <DataAnnotationsValidator />
     <div class="mb-3">
-        <label>País:</label> 
+        <label>País:</label>
         <div>
-            <InputText class="form-control" @bind-Value="@Country.Name"/>
-            <ValidationMessage For="@(() => Country.Name)"/>
+            <InputText class="form-control" @bind-Value="@Country.Name" />
+            <ValidationMessage For="@(() => Country.Name)" />
         </div>
     </div>
-    
-    <button class="btn btn-primary" type="submit">Guardar cambios</button>
+    <button class="btn btn-primary" type="submit">Guardar Cambios</button>
     <button class="btn btn-success" @onclick="ReturnAction">Regresar</button>
 </EditForm>
 
@@ -38,30 +37,30 @@
         editContext = new(Country);
     }
 
-    // metodo para no perder los cambios que hay sobre un text al dar boton atras o cerrar
     private async Task OnBeforeInternalNavigation(LocationChangingContext context)
     {
-        var formWasMofied = editContext.IsModified();  // nos dice si el formulario fue modificado o no
+        var formWasMofied = editContext.IsModified();
         if (!formWasMofied || FormPostedSuccessfully)
         {
             return;
         }
 
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
-        {
-            Title = "Confirmación",
-            Text = "¿Estas seguro de salir?... Perderas los cambios!",
-            Icon = SweetAlertIcon.Question,
-            ShowCancelButton = true,
-            CancelButtonText = "Cancelar",
-            ConfirmButtonText = "Confirmar"
-        });
+            {
+                Title = "Confirmación",
+                Text = "¿Deseas abandonar la página y perder los cambios?",
+                Icon = SweetAlertIcon.Question,
+                ShowCancelButton = true,
+                CancelButtonText = "No",
+                ConfirmButtonText = "Si"
+            });
 
         var confirm = !string.IsNullOrEmpty(result.Value);
         if (confirm)
         {
             return;
         }
+
         context.PreventNavigation();
     }
 }
