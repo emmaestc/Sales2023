@@ -16,12 +16,18 @@ namespace Sales.shared.Entities
         [MaxLength(100, ErrorMessage = "El campo {0} no puede contener mas de {1} caracteres")]
         public string Name { get; set; } = null!;
 
+        public ICollection<ProductCategory>? ProductCategories { get; set; }
+
+        [Display(Name = "Productos")]
+        public int ProductCategoriesNumber => ProductCategories == null ? 0 : ProductCategories.Count;
+
+
         //public ICollection<Idcagor>? States { get; set; }
 
         //public int StatesNumber => States == null ? 0 : States.Count;
 
         //public ICollection<Category>? Categories { get; set; }
 
-//        public int StatesNumber => Categories == null ? 0 : Categories.Count;
+        //        public int StatesNumber => Categories == null ? 0 : Categories.Count;
     }
 }
