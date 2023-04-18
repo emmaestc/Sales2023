@@ -46,6 +46,7 @@ namespace Sales.shared.Entities
 
         [Display(Name = "Usuario")]
         public string FullName => $"{FirstName} {LastName}";
+        public ICollection<TemporalSale>? TemporalSales { get; set; }
     }
 
 }
