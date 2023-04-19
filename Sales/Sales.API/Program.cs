@@ -55,6 +55,7 @@ builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddScoped<IUserHelper, UserHelper>();
 builder.Services.AddScoped<IFileStorage, FileStorage>();
 builder.Services.AddScoped<IMailHelper, MailHelper>(); // Para los envio de confirmación de correo
+builder.Services.AddScoped<IOrdersHelper, OrdersHelper>();
 
 builder.Services.AddIdentity<User, IdentityRole>(x =>
 {
